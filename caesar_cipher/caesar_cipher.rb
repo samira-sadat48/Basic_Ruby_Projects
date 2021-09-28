@@ -1,17 +1,27 @@
 def caesar_cipher(message, shift_factor)
     #65 - 90 => A-Z
     #97 - 122 => a-z
-    
-    #convert string into char array or iterate through each char
+    result_message = ""
+    #iterate through each char
     message.each_char {|c| 
         #if char is alphabetic, do the shift
-        puts is_letter?(c)
+        if is_letter?(c)
             #do shift
+            if c.ord < 91
+                base = 65
+            else
+                base = 97
+            end
             #if the shift is out of the range, add in the correction
+            correction = (((c.ord - base) + shift_factor) % 26) + base
+            puts correction.chr
+            result_message += correction.chr
+        else
+            result_message += c 
+        end
     }
-    
-    #make the char array into a string if applies
     #return shifted string
+    return result_message;
 end
 
 def is_letter?(c)
@@ -23,9 +33,11 @@ def is_letter?(c)
     end
 end
 
+#MAIN---------------------------------------------------------------
+
 print "Enter the message to encode: "
 message = gets.chomp
 print "Enter the shift factor: "
 shift_factor = gets.chomp.to_i
 
-caesar_cipher(message,shift_factor)
+puts "Your secret message is: " + caesar_cipher(message,shift_factor)
