@@ -14,7 +14,6 @@ def caesar_cipher(message, shift_factor)
             end
             #if the shift is out of the range, add in the correction
             correction = (((c.ord - base) + shift_factor) % 26) + base
-            puts correction.chr
             result_message += correction.chr
         else
             result_message += c 
